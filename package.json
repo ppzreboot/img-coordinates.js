@@ -1,0 +1,21 @@
+{
+  "name": "img-coordinates",
+  "version": "0.0.1",
+  "description": "Get coordinates data from a img.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --module preserve ./index.ts",
+    "demo": "http-server"
+  },
+  "keywords": [
+    "img",
+    "coordinates",
+    "ppz"
+  ],
+  "author": "ppz",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "typescript": "^5.5.3"
+  }
+}

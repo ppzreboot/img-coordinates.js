@@ -1,0 +1,60 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>ZHI</title>
+    <style>
+        th, td {
+            text-align: left;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" onchange="new_img(event)">
+    <div id="data"></div>
+    <script type="module">
+        import { get_img_coordinates } from './index.js'
+
+        window.new_img = evt => {
+            const file = evt.target.files[0]
+            if (!file) return
+            const url = URL.createObjectURL(file)
+
+            const img = new Image()
+            img.src = url
+
+            img.onload = () => {
+                const data = get_img_coordinates(img)
+                document.getElementById('data').innerHTML = `
+                    <h5>${data.width} x ${data.height}</h5>
+                    <img src="${url}">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>coordinates</th>
+                                ${Array.from({ length: data.width }).map((_, i) => `<th>${i}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>${data.coor.map((row, j) =>
+                            `<tr>
+                                <th>${j}</th>
+                                ${
+                                    row.map(color =>
+                                        // `<td>rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})</td>`
+                                        // `<td>(${color.r},${color.g},${color.b},${color.a})</td>`
+                                        `<td style="background: rgba(${color.r},${color.g},${color.b},${color.a});
+                                        width: 2px; height: 2px;"></td>`
+                                    ).join('')
+                                }
+                            </tr>`
+                        ).join('')}</tbody>
+                    </table>
+                `
+            }
+        }
+    </script>
+</body>
+</html>
