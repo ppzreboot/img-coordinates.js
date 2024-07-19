@@ -1,6 +1,6 @@
 {
   "name": "img-coordinates",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get coordinates data from a img.",
   "main": "index.js",
   "scripts": {
