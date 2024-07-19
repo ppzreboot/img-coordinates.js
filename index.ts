@@ -7,7 +7,17 @@ interface Color {
 }
 
 export
-function get_img_coordinates(img: HTMLImageElement) {
+type Coordinates_data = Color[][]
+
+export
+interface Coordinates {
+    width: number
+    height: number
+    data: Coordinates_data
+}
+
+export
+function get_img_coordinates(img: HTMLImageElement): Coordinates {
     const { width, height } = img
 
     const canvas = document.createElement('canvas')
@@ -16,18 +26,18 @@ function get_img_coordinates(img: HTMLImageElement) {
     const ctx = canvas.getContext('2d')!
     ctx.drawImage(img, 0, 0)
 
-    const data = ctx.getImageData(0, 0, width, height).data
+    const img_data = ctx.getImageData(0, 0, width, height).data
 
-    const coor: Color[][] = []
+    const data: Coordinates_data = []
     let x = 0, y = 0
     while(true) {
-        const row = coor[y] ??= []
+        const row = data[y] ??= []
         const first_i = y*width*4 + x*4
         row.push({
-            r: data[first_i],
-            g: data[first_i + 1],
-            b: data[first_i + 2],
-            a: data[first_i + 3],
+            r: img_data[first_i],
+            g: img_data[first_i + 1],
+            b: img_data[first_i + 2],
+            a: img_data[first_i + 3],
         })
         if (x === width - 1) {
             if (y === height - 1) // 结束
@@ -39,5 +49,5 @@ function get_img_coordinates(img: HTMLImageElement) {
         } else // 下一个像素
             x ++
     }
-    return { coor, width, height }
+    return { data, width, height }
 }
