@@ -1,6 +1,6 @@
 {
   "name": "img-coordinates",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Get coordinates data from a img.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,10 @@
     "coordinates",
     "ppz"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppzreboot/img-coordinates.js.git"
+  },
   "author": "ppz",
   "license": "UNLICENSED",
   "devDependencies": {

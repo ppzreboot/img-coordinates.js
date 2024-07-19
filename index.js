@@ -1,9 +1,11 @@
 export function get_img_coordinates(img) {
     var _a;
+    var width = img.width, height = img.height;
     var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
     var ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    var width = img.width, height = img.height;
     var data = ctx.getImageData(0, 0, width, height).data;
     var coor = [];
     var x = 0, y = 0;

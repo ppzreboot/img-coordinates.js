@@ -8,11 +8,14 @@ interface Color {
 
 export
 function get_img_coordinates(img: HTMLImageElement) {
+    const { width, height } = img
+
     const canvas = document.createElement('canvas')
+    canvas.width = width
+    canvas.height = height
     const ctx = canvas.getContext('2d')!
     ctx.drawImage(img, 0, 0)
 
-    const { width, height } = img
     const data = ctx.getImageData(0, 0, width, height).data
 
     const coor: Color[][] = []
